@@ -8,6 +8,7 @@ data = pd.read_csv('Credit_OTP.csv')
 
 # Создание Dash-приложения
 app = dash.Dash(__name__)
+sever=app.server
 
 # Создание выпадающего списка с уникальными значениями из 'POSTAL_ADDRESS_PROVINCE'
 provinces = data['POSTAL_ADDRESS_PROVINCE'].unique()
