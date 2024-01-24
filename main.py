@@ -12,6 +12,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///school.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = 'your_secret_key'
 
+server = app.server
 login_manager = LoginManager(app)
 login_manager.login_view = 'login'
 
