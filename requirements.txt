@@ -1,3 +1,4 @@
+gunicorn 
 aiofiles==23.1.0
 aiogram==3.1.1
 aiohttp==3.8.6
