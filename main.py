@@ -65,7 +65,7 @@ class LoginForm(FlaskForm):
 class AddAssignmentForm(FlaskForm):
     title = StringField('Title', validators=[DataRequired()])
     content = TextAreaField('Content', validators=[DataRequired()])
-    subject_id = SelectField('Subject', coerce=int, validators=[DataRequired()])
+    
     submit = SubmitField('Add Assignment')
 
 @app.route('/')
@@ -91,17 +91,22 @@ def login():
 @login_required
 def add_assignment():
     form = AddAssignmentForm()
+    
 
-    # Заполните поле выбора предмета данными из базы данных
-    form.subject_id.choices = [(subject.id, subject.name) for subject in Subject.query.all()]
+
 
     if form.validate_on_submit():
+       
         # Получите данные из формы и добавьте задание в базу данных
         title = form.title.data
+        car_wash= Subject(name= title, teacher='Игорь Мойщиков')
         content = form.content.data
-        subject_id = form.subject_id.data
+        db.session.add(car_wash)
+        print(car_wash)
 
-        assignment = Assignment(title=title, content=content, subject_id=subject_id, deadline=datetime.utcnow())
+        assignment = Assignment(title=title, content=content, subject=car_wash, deadline=datetime.utcnow())
+        
+
         db.session.add(assignment)
         db.session.commit()
 
@@ -204,7 +209,7 @@ if __name__ == '__main__':
         existing_student2 = User.query.filter_by(username='dmitry_smirnov').first()
 
         if not existing_student1:
-            student1 = User(username='olga_nikolaeva', password='studentpass', role='student')
+            student1 = User(username='olga_nikolaeva', password='pass', role='student')
             db.session.add(student1)
 
         if not existing_student2:
@@ -215,7 +220,7 @@ if __name__ == '__main__':
         existing_teacher2 = User.query.filter_by(username='irina_sidorova').first()
 
         if not existing_teacher1:
-            teacher1 = User(username='alexander_ivanov', password='teacherpass', role='teacher')
+            teacher1 = User(username='alexander_ivanov', password='rpass', role='teacher')
             db.session.add(teacher1)
 
         if not existing_teacher2:
