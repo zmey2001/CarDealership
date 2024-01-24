@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Салон красоты</title>
+    <style>
+        /* Стили для расположения изображения в левом верхнем углу */
+.image-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.image-container img {
+  /* Можно установить размеры изображения или другие стили по вашему выбору */
+  width: 200px; /* Пример: ширина изображения 200px */
+  height: auto; /* Автоматическое соотношение высоты */
+  
+}
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-image: url("/static/nail_2.png"), url("/static/nail_3.png");
+            background-position: left top, right bottom; /* Позиции изображений: слева вверху и справа вверху */
+            background-repeat: no-repeat, no-repeat; 
+            background-color: rgb(216, 130, 130);
+            
+  /* Дополнительные стили для удобства просмотра */
+            margin: 0;
+            padding: 0;
+            height: 100vh; /* Заполнение всей высоты окна браузера */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        header {
+            color: #fff;
+            padding: 1em;
+            text-align: center;
+            border-radius: 20px;
+            background-color: #ECA5A5;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+           
+        }
+
+        main {
+            margin: 1em;
+            padding: 1em;
+            background-color: #ECB8B8;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            color: #8C2A2A	;
+            text-align: center;
+        }
+
+        h1 {
+            color:#B7224A;
+        }
+
+        p {
+            color: #ffffff;
+        }
+
+        a {
+            color: #c60132;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header>
+       <h1>Добро пожаловать в салон красоты <i>Красотка</i></h1>
+            <p>Выберите своего мастера и записывайтесь на услугу прямо сейчас.</p>
+        
+    </header>
+
+    <main>
+        <h2>Наши мастера</h2>
+        <ul type="none">
+            {% for worker in workers %}
+                <li>{{ worker[1] }} - {{ worker[2] }}</li>
+            {% endfor %}
+        </ul>
+
+        <h2>Наши услуги</h2>
+        <ul type="none">
+            {% for service in services %}
+                <li>{{ service[1] }} - {{ service[2] }} руб.</li>
+            {% endfor %}
+        </ul>
+
+        <a href="{{ url_for('appointments') }}">Перейти к записи</a>
+    </main>
+</body>
+</html>

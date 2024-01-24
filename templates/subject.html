@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Информация по услуге {{ subject.name }}</title>
+    <!-- Подключение Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa; /* Серый цвет фона страницы */
+            color: #495057; /* Серый цвет текста страницы */
+            padding: 20px; /* Внутренние отступы страницы */
+        }
+        h1, h2 {
+            color: #007bff; /* Синий цвет заголовков h1 и h2 */
+        }
+        ul {
+            list-style-type: none; /* Убрать маркеры списка */
+            padding: 0; /* Убрать внутренние отступы у списка */
+        }
+        li {
+            margin-bottom: 20px; /* Внешние отступы для элементов списка */
+        }
+        a {
+            color: #007bff; /* Синий цвет ссылки */
+            text-decoration: none; /* Убрать подчеркивание ссылки */
+        }
+        a:hover {
+            text-decoration: underline; /* Добавить подчеркивание при наведении на ссылку */
+        }
+        .assignment-content {
+            background-color: #ffffff; /* Белый цвет фона блока с контентом задания */
+            padding: 20px; /* Внутренние отступы блока с контентом задания */
+            border: 1px solid #dee2e6; /* Серый цвет границы блока с контентом задания */
+            border-radius: 8px; /* Закругление углов блока с контентом задания */
+            margin-top: 10px; /* Внешние отступы сверху для блока с контентом задания */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="mb-4">Информация по услуге: {{ subject.name }}</h1>
+       
+        <ul>
+            {% for assignment in assignments %}
+                <li>
+                    <h4>{{ assignment.title }}</h4>
+                    <div class="assignment-content">
+                        {{ assignment.content|safe }}
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+        <p><a href="{{ url_for('dashboard') }}">Назад к панели управления</a></p>
+    </div>
+  
+    <!-- ... (предыдущий код) -->
+
+{% for assignment in assignments %}
+<div class="card mb-4">
+    <div class="card-body">
+        <h5 class="card-title">{{ assignment.title }}</h5>
+       
+        <div class="assignment-content">
+            {{ assignment.content|safe }}
+        </div>
+        <div class="response-form mt-3">
+            <h6 class="mb-3">Ваше сообщение:</h6>
+            <form method="post" action="{{ url_for('submit_response', assignment_id=assignment.id) }}">
+                <div class="form-group">
+                    <textarea class="form-control" name="response" rows="4">{{ assignment.response }}</textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Отправить заявку</button>
+            </form>
+        </div>
+        <div class="messages mt-4">
+           
+            </ul>
+        </div>
+    </div>
+</div>
+{% endfor %}
+
+<!-- ... (предыдущий код) -->
+
+    <!-- Подключение Bootstrap JS и Popper.js (необходимо для некоторых компонентов Bootstrap) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

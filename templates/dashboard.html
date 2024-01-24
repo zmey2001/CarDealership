@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Автомобильный салон</title>
+    <!-- Подключение Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            color: #495057;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        h1, h2 {
+            color: #007bff;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin-bottom: 20px;
+        }
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .assignment-content {
+            background-color: #ffffff;
+            padding: 20px;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+        .deadline {
+            color: #dc3545; /* Красный цвет текста для дедлайна */
+            font-weight: bold;
+        }
+          /* Дополнительные стили могут быть добавлены здесь */
+
+        /* Стили для навигационного меню */
+        nav {
+            background-color: #007bff;
+            padding: 10px;
+            text-align: center; /* Выравнивание текста по центру */
+        }
+
+        nav a {
+            display: inline-block; /* Делаем элементы строчно-блочными, чтобы применить margin */
+            color: white;
+            text-decoration: none;
+            padding: 10px;
+            margin-right: 20px; /* Отступ между элементами меню */
+            transition: background-color 0.3s;
+        }
+
+        nav a:hover {
+            background-color: #0056b3;
+        }
+
+        /* Стили для карточек предметов */
+        .card {
+            margin-bottom: 20px;
+        }
+
+        /* Центрирование контента */
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+    footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #3a90e6;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="{{ url_for('login') }}">Выход</a>
+        {% if current_user.role == 'teacher' %}
+       <a href="{{ url_for('add_assignment') }}">Добавить услугу</a>
+    {% endif %}
+      
+      
+    </nav>
+   
+    </nav>
+    <div class="container mt-5">
+        <h1 class="mb-4">Услуги для вашего автомобиля</h1>
+       
+        <div class="row">
+            {% for subject in subjects %}
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ subject.name }}</h5>
+                            
+                            <h6 class="card-subtitle mb-2 text-muted">Услуги</h6>
+                            <ul class="list-group">
+                                {% for assignment in subject.assignments %}
+                                    <li class="list-group-item">{{ assignment.title }} - {{ assignment.content |safe }}</li>
+                            
+                                {% endfor %}
+                            </ul>
+                          <a href="{{ url_for('subject', subject_id=subject.id) }}" class="card-link">Открыть</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+          
+            <!-- ... (previous code) -->
+{% if current_user.role != 'teacher' %}
+<div class="container mt-5">
+    <h2 class="mb-4">Записи</h2>
+    <div class="row">
+        {% for assignment in assignments %}
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ assignment.title }}</h5>
+                     
+                        <div class="assignment-content">
+                            {{ assignment.content }}
+                        </div>
+                        <div class="responses mt-3">
+                            <h6>Сообщение от клиента:</h6>
+                            <p>{{ assignment.response }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+<!-- ... (remaining code) -->
+
+   
+    
+    <footer>
+        &copy; Центр автомобильного салона 2024 
+    </footer>
+    <!-- Подключение Bootstrap JS и Popper.js (необходимо для некоторых компонентов Bootstrap) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
