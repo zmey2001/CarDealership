@@ -92,10 +92,9 @@
        <a href="{{ url_for('add_assignment') }}">Добавить услугу</a>
     {% endif %}
       
-      
     </nav>
    
-    </nav>
+  
     <div class="container mt-5">
         <h1 class="mb-4">Услуги для вашего автомобиля</h1>
        
@@ -120,7 +119,7 @@
             {% endfor %}
           
             <!-- ... (previous code) -->
-{% if current_user.role != 'teacher' %}
+{% if current_user.role == 'teacher' %}
 <div class="container mt-5">
     <h2 class="mb-4">Записи</h2>
     <div class="row">

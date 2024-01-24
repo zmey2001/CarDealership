@@ -83,6 +83,9 @@
 <body>
     <div>
         <h1>Вход</h1>
+        <p> логин и пароль для админки  alexander_ivanov rpass</p>
+    <p> логин и пароль для пользователя olga_nikolaeva pass</p>
+
         <form method="post" action="{{ url_for('login') }}">
             {{ form.csrf_token }}
             <div class="form-group">
@@ -96,7 +99,10 @@
             <button type="submit" class="btn btn-primary">Войти</button>
         </form>
     </div>
+ 
 
+
+    
     <!-- Подключение Bootstrap JS и Popper.js (необходимо для некоторых компонентов Bootstrap) -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.1/dist/umd/popper.min.js"></script>
