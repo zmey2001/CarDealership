@@ -12,6 +12,7 @@
             padding: 20px;
         }
         h1 {
+            text-align: center;
             color: #007bff;
         }
         form {
@@ -54,9 +55,8 @@
     </style>
 </head>
 <body>
-    <center>
+  
         <h1>Добавить услугу</h1>
-    </center>
     <form method="POST" action="{{ url_for('add_assignment') }}">
         {{ form.csrf_token }}
         <label for="title">Название услуги:</label>
@@ -65,10 +65,6 @@
         {{ form.content }}
         <p></p>
         <button type="submit">Добавить услугу</button>
-
-
-
-      
     </form>
 </body>
 </html>

@@ -8,10 +8,9 @@ from flask_login import LoginManager, UserMixin, login_user, login_required, cur
 from wtforms import TextAreaField, SelectField
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///school.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///salon.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = 'your_secret_key'
-
 
 login_manager = LoginManager(app)
 login_manager.login_view = 'login'
@@ -92,9 +91,6 @@ def login():
 def add_assignment():
     form = AddAssignmentForm()
     
-
-
-
     if form.validate_on_submit():
        
         # Получите данные из формы и добавьте задание в базу данных
@@ -103,10 +99,7 @@ def add_assignment():
         content = form.content.data
         db.session.add(car_wash)
         print(car_wash)
-
         assignment = Assignment(title=title, content=content, subject=car_wash, deadline=datetime.utcnow())
-        
-
         db.session.add(assignment)
         db.session.commit()
 
